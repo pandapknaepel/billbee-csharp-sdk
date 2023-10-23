@@ -4,24 +4,27 @@ namespace Panda.NuGet.BillbeeClient.Utilities;
 
 public interface IRateLimiter
 {
-    Task ThrottleAsync();
+    Task ThrottleAsync(object key, int maxRequestsPerTimeRange = 6, int timeRangeInSeconds = 60);
 }
 
 public class RateLimiter : IRateLimiter
 {
-    private readonly SemaphoreSlim _rateLimiter = new(6);
-    private readonly ConcurrentQueue<DateTimeOffset> _requestTimestamps = new();
+    private readonly ConcurrentDictionary<object, SemaphoreSlim> _rateLimiters = new();
+    private readonly ConcurrentDictionary<object, ConcurrentQueue<DateTimeOffset>> _requestTimestamps = new();
 
-    public async Task ThrottleAsync()
+    public async Task ThrottleAsync(object key, int maxRequestsPerTimeRange = 6, int timeRangeInSeconds = 60)
     {
-        await _rateLimiter.WaitAsync();
+        var rateLimiter = _rateLimiters.GetOrAdd(key, new SemaphoreSlim(maxRequestsPerTimeRange));
+        var requestTimestamps = _requestTimestamps.GetOrAdd(key, new ConcurrentQueue<DateTimeOffset>());
 
-        while (_requestTimestamps.TryPeek(out var oldestTimestamp))
+        await rateLimiter.WaitAsync();
+
+        while (requestTimestamps.TryPeek(out var oldestTimestamp))
         {
-            if (DateTimeOffset.UtcNow - oldestTimestamp > TimeSpan.FromMinutes(1))
+            if ((DateTimeOffset.UtcNow - oldestTimestamp).TotalSeconds > timeRangeInSeconds)
             {
-                _requestTimestamps.TryDequeue(out _);
-                _rateLimiter.Release();
+                requestTimestamps.TryDequeue(out _);
+                rateLimiter.Release();
             }
             else
             {
@@ -29,6 +32,6 @@ public class RateLimiter : IRateLimiter
             }
         }
 
-        _requestTimestamps.Enqueue(DateTimeOffset.UtcNow);
+        requestTimestamps.Enqueue(DateTimeOffset.UtcNow);
     }
 }

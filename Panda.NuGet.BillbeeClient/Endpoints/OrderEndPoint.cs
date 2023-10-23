@@ -20,31 +20,33 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task<ApiResult<Order>> GetOrderAsync(string id, int articleTitleSource = 0)
         {
-            await _rateLimiter.ThrottleAsync();
+            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}");
+            return await _restClient.GetAsync<ApiResult<Order>>($"/orders/{id}?articleTitleSource={articleTitleSource}");
+        }
+        
+        public async Task<ApiResult<Order>> GetOrderAsync(long id, int articleTitleSource = 0)
+        {
+            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}");
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/{id}?articleTitleSource={articleTitleSource}");
         }
 
         public async Task<ApiResult<List<string>>> GetPatchableFieldsAsync()
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.GetAsync<ApiResult<List<string>>>("/orders/PatchableFields");
         }
 
         public async Task<ApiResult<Order>> PatchOrderAsync(long id, Dictionary<string, object> fieldsToPatch)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.PatchAsync<ApiResult<Order>, Dictionary<string, object>>($"/orders/{id}", fieldsToPatch);
         }
 
         public async Task<ApiResult<Order>> GetOrderByExternalReferenceAsync(string id)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/findbyextref/{id}");
         }
 
         public async Task<ApiResult<Order>> GetOrderByExternalIdAndPartnerAsync(string partner, string? id)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/find/{id}/{partner}");
         }
 
@@ -60,7 +62,6 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             DateTime? modifiedAtMax = null,
             bool excludeTags = false)
         {
-            await _rateLimiter.ThrottleAsync();
             var parameters = new NameValueCollection();
 
             if (minOrderDate != null)
@@ -134,7 +135,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             bool includePositions = false,
             bool excludeTags = false)
         {
-            await _rateLimiter.ThrottleAsync();
+            await _rateLimiter.ThrottleAsync($"{nameof(GetInvoiceListAsync)}-{page}-{minInvoiceDate}", 60);
             var parameters = new NameValueCollection();
 
             if (minInvoiceDate != null)
@@ -195,37 +196,33 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task<ApiResult<OrderResult>> PostNewOrderAsync(Order order, long shopId)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.PostAsync<ApiResult<OrderResult>, Order>($"/orders?shopId={shopId}", order);
         }
         
         public async Task<ApiResult<Order>> PostNewOrderAsync(Order order)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.PostAsync<ApiResult<Order>, Order>("/orders", order);
         }
         
         public async Task AddTagsAsync(List<string> tags, long orderId)
         {
-            await _rateLimiter.ThrottleAsync();
             await _restClient.PostAsync($"/orders/{orderId}/tags", new TagsRequest { Tags = tags });
         }
 
         public async Task UpdateTagsAsync(List<string> tags, long orderId)
         {
-            await _rateLimiter.ThrottleAsync();
             await _restClient.PutAsync($"/orders/{orderId}/tags", new TagsRequest { Tags = tags });
         }
         
         public async Task AddShipmentAsync(OrderShipment shipment)
         {
-            await _rateLimiter.ThrottleAsync();
             await _restClient.PostAsync($"/orders/{shipment.OrderId}/shipment", shipment);
         }
 
         public async Task<ApiResult<DeliveryNote>> CreateDeliveryNoteAsync(long orderId, bool includePdf = false, long? sendToCloudId = null)
         {
-            await _rateLimiter.ThrottleAsync();
+            await _rateLimiter.ThrottleAsync($"{nameof(CreateDeliveryNoteAsync)}-{orderId}", 1, 60 * 5);
+            
             var path = $"/orders/CreateDeliveryNote/{orderId}?includePdf={includePdf}";
             if (sendToCloudId.HasValue)
             {
@@ -237,7 +234,8 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task<ApiResult<Invoice>> CreateInvoiceAsync(long orderId, bool includePdf = false, long? templateId = null, long? sendToCloudId = null)
         {
-            await _rateLimiter.ThrottleAsync();
+            await _rateLimiter.ThrottleAsync($"{nameof(CreateInvoiceAsync)}-{orderId}", 1, 60 * 5);
+            
             var path = $"/orders/CreateInvoice/{orderId}?includePdf={includePdf}";
             if (sendToCloudId.HasValue)
             {
@@ -254,19 +252,16 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task ChangeOrderStateAsync(long id, OrderStateEnum state)
         {
-            await _rateLimiter.ThrottleAsync();
             await _restClient.PutAsync($"/orders/{id}/orderstate", new OrderStateRequest { NewStateId = (int)state });
         }
 
         public async Task SendMailForOrderAsync(long orderId, SendMessage message)
         {
-            await _rateLimiter.ThrottleAsync();
             await _restClient.PostAsync($"/orders/{orderId}/send-message", message);
         }
 
         public async Task CreateEventAtOrderAsync(long orderId, string? eventName, uint delayInMinutes = 0)
         {
-            await _rateLimiter.ThrottleAsync();
             var model = new TriggerEventContainer
             {
                 DelayInMinutes = delayInMinutes,
@@ -278,13 +273,11 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task<ApiResult<List<LayoutTemplate>>> GetLayoutsAsync()
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.GetAsync<ApiResult<List<LayoutTemplate>>>("/layouts");
         }
 
         public async Task<ParsePlaceholdersResult> ParsePlaceholdersAsync(long orderId, ParsePlaceholdersQuery parsePlaceholdersQuery)
         {
-            await _rateLimiter.ThrottleAsync();
             return await _restClient.PostAsync<ParsePlaceholdersResult, ParsePlaceholdersQuery>($"/orders/{orderId}/parse-placeholders", parsePlaceholdersQuery);
         }
     }

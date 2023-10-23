@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http.Json;
 using Panda.NuGet.BillbeeClient.Configs;
 using Panda.NuGet.BillbeeClient.Exceptions;
+using Panda.NuGet.BillbeeClient.Utilities;
 
 namespace Panda.NuGet.BillbeeClient;
 
@@ -23,15 +24,20 @@ internal class BillbeeRestClient : IBillbeeRestClient
 {
     private readonly BillbeeApiConfig _config;
     private readonly HttpClient _httpClient;
+    private readonly IRateLimiter _rateLimiter;
+    
+    private const string GlobalRateLimitKey = "GlobalRateLimitKey";
 
-    public BillbeeRestClient(BillbeeApiConfig billbeeApiConfig, HttpClient httpClient)
+    public BillbeeRestClient(BillbeeApiConfig billbeeApiConfig, HttpClient httpClient, IRateLimiter rateLimiter)
     {
         _config = billbeeApiConfig;
         _httpClient = httpClient;
+        _rateLimiter = rateLimiter;
     }
 
     public async Task<HttpStatusCode> GetAsync(string resource)
     {
+        await _rateLimiter.ThrottleAsync(GlobalRateLimitKey, 50, 1);
         var response = await _httpClient.GetAsync(resource);
         return response.StatusCode;
     }
@@ -136,6 +142,8 @@ internal class BillbeeRestClient : IBillbeeRestClient
     {
         for (var retry = 0; retry <= 3; retry++)
         {
+            await _rateLimiter.ThrottleAsync(GlobalRateLimitKey, 50, 1);
+            
             var response = await _httpClient.SendAsync(requestMessage);
 
             if (response.StatusCode != HttpStatusCode.TooManyRequests || retry == 3)
