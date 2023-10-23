@@ -10,7 +10,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
     {
         private readonly IBillbeeRestClient _restClient;
 
-        internal OrderEndPoint(IBillbeeRestClient restClient)
+        public OrderEndPoint(IBillbeeRestClient restClient)
         {
             _restClient = restClient;
         }

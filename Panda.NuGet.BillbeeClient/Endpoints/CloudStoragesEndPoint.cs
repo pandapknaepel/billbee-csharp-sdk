@@ -8,7 +8,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
     {
         private readonly IBillbeeRestClient _restClient;
 
-        internal CloudStoragesEndPoint(IBillbeeRestClient restClient)
+        public CloudStoragesEndPoint(IBillbeeRestClient restClient)
         {
             _restClient = restClient;
         }

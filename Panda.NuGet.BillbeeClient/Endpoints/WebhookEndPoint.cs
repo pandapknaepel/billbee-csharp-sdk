@@ -9,7 +9,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
     {
         private readonly IBillbeeRestClient _restClient;
 
-        internal WebhookEndPoint(IBillbeeRestClient restClient)
+        public WebhookEndPoint(IBillbeeRestClient restClient)
         {
             _restClient = restClient;
         }

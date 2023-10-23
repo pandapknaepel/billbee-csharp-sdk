@@ -7,7 +7,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
     {
         private readonly IBillbeeRestClient _restClient;
 
-        internal EnumEndPoint(IBillbeeRestClient restClient)
+        public EnumEndPoint(IBillbeeRestClient restClient)
         {
             _restClient = restClient;
         }

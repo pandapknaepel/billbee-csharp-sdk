@@ -6,7 +6,7 @@ using Panda.NuGet.BillbeeClient.Exceptions;
 
 namespace Panda.NuGet.BillbeeClient;
 
-internal interface IBillbeeRestClient
+public interface IBillbeeRestClient
 {
     Task<HttpStatusCode> GetAsync(string resource);
     Task<T> GetAsync<T>(string resource, NameValueCollection? parameter = null) where T : new();
