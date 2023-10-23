@@ -1,6 +1,6 @@
 ﻿using Panda.NuGet.BillbeeClient.Enums;
 
-namespace Panda.NuGet.BillbeeClient.Model
+namespace Panda.NuGet.BillbeeClient.Models
 {
     public class Order
     {

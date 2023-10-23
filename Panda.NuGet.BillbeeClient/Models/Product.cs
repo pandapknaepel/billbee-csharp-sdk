@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Panda.NuGet.BillbeeClient.Model
+namespace Panda.NuGet.BillbeeClient.Models
 {
     /// <summary>
     /// Defines a product/ article in billbee

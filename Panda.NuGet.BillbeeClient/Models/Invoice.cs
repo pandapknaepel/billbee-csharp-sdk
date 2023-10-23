@@ -1,4 +1,4 @@
-﻿namespace Panda.NuGet.BillbeeClient.Model
+﻿namespace Panda.NuGet.BillbeeClient.Models
 {
     /// <summary>
     /// Short hand information for an invoice, including the invoice as PDF- Document.

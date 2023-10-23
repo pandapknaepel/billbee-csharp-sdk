@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Panda.NuGet.BillbeeClient.Model
+namespace Panda.NuGet.BillbeeClient.Models
 {
     public class OrderItemProduct
     {

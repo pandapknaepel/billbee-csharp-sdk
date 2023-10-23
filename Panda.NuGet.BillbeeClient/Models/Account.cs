@@ -1,6 +1,6 @@
 ﻿using Panda.NuGet.BillbeeClient.Enums;
 
-namespace Panda.NuGet.BillbeeClient.Model
+namespace Panda.NuGet.BillbeeClient.Models
 {
     /// <summary>
     /// Accountinformation for creation of a new account

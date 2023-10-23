@@ -1,4 +1,4 @@
-﻿namespace Panda.NuGet.BillbeeClient.Model
+﻿namespace Panda.NuGet.BillbeeClient.Models
 {
     public class SearchResult
     {
