@@ -2,7 +2,27 @@
 
 Panda.NuGet.BillbeeClient is a .NET Core library designed to provide an easy-to-use interface for communicating with the Billbee API. This project is a fork of the [billbeeio/billbee-csharp-sdk](https://github.com/billbeeio/billbee-csharp-sdk) repository.
 
-This library utilizes `System.Net.Http` and `System.Text.Json` for HTTP requests and JSON serialization/deserialization respectively, moving away from the use of RestSharp and Newtonsoft.Json which were used in the original repository.
+## Goals
+
+The primary goal of this library is to provide a modern, efficient, and streamlined way to interact with the Billbee API. Specifically, it employs `System.Net.Http` for making HTTP requests and `System.Text.Json` for JSON serialization and deserialization. These choices move away from the RestSharp and Newtonsoft.Json libraries used in the original repository.
+
+### Advantages
+
+1. **Consistency**: Utilizing native .NET Core libraries like `System.Net.Http` and `System.Text.Json` brings a level of consistency and integration that external libraries may not offer.
+
+2. **Performance**: Both `System.Net.Http` and `System.Text.Json` are optimized for performance, which can be crucial for high-throughput applications.
+
+3. **Ease of Maintenance**: Using built-in libraries means fewer external dependencies, making it easier to maintain and update the project.
+
+4. **Forward Compatibility**: Leveraging core libraries ensures better forward compatibility with future .NET Core updates.
+
+5. **Breaking Changes**: Moving away from RestSharp eliminates the risk posed by breaking changes in external libraries, providing a more stable foundation for the project.
+
+By aligning with the .NET Core ecosystem, this library aims for robustness, efficiency, and ease of use.
+
+## Rate Limiting
+
+This project implements request rate limiting through a singleton RateLimiter. This ensures that API calls do not exceed the set rate limits. Note, however, that this implementation will only function reliably if multiple instances of the application are not running concurrently.
 
 ## Installation
 
