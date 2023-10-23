@@ -109,7 +109,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
     
     private string? GetBasePath(string resource)
     {
-        return $"{_config.BaseUrl}/{resource}".Replace("//", "/");
+        return $"{_config.BaseUrl}/{resource}";
     }
 
     private static string? NameValueCollectionToQueryString(NameValueCollection nameValueCollection)
