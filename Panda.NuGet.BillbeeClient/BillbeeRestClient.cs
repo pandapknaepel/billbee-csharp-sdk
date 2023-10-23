@@ -44,54 +44,68 @@ internal class BillbeeRestClient : IBillbeeRestClient
             path += "?" + NameValueCollectionToQueryString(parameter);
         }
         var request = new HttpRequestMessage(HttpMethod.Get, path);
-        var response = await _httpClient.SendAsync(request);
-        await HandleResponseAsync($"GET {path}", response);
+        var response = await SendRequestWithRetryAsync(request);
         return (await response.Content.ReadFromJsonAsync<T>())!;
     }
 
     public async Task<TResponse> PutAsync<TResponse, TRequest>(string resource, TRequest request)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PutAsJsonAsync(path, request);
-        await HandleResponseAsync($"PUT {path}", response);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Put, path)
+        {
+            Content = JsonContent.Create(request)
+        };
+        var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
     }
 
     public async Task PutAsync<TRequest>(string resource, TRequest request)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PutAsJsonAsync(path, request);
-        await HandleResponseAsync($"PUT {path}", response);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Put, path)
+        {
+            Content = JsonContent.Create(request)
+        };
+        _ = await SendRequestWithRetryAsync(requestMessage);
     }
 
     public async Task<TResponse> PatchAsync<TResponse, TRequest>(string resource, TRequest request)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PatchAsJsonAsync(path, request);
-        await HandleResponseAsync($"PATCH {path}", response);
+        var requestMessage = new HttpRequestMessage(new HttpMethod("PATCH"), path)
+        {
+            Content = JsonContent.Create(request)
+        };
+        var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
     }
         
     public async Task<TResponse> PostAsync<TResponse, TRequest>(string resource, TRequest request)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PostAsJsonAsync(path, request);
-        await HandleResponseAsync($"POST {path}", response);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, path)
+        {
+            Content = JsonContent.Create(request)
+        };
+        var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
     }
 
     public async Task PostAsync<TRequest>(string resource, TRequest request)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PostAsJsonAsync(path, request);
-        await HandleResponseAsync($"POST {path}", response);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, path)
+        {
+            Content = JsonContent.Create(request)
+        };
+        _ = await SendRequestWithRetryAsync(requestMessage);
     }
 
     public async Task<TResponse> PostAsync<TResponse>(string resource)
     {
         var path = GetBasePath(resource);
-        var response = await _httpClient.PostAsync(path, default);
-        await HandleResponseAsync($"POST {path}", response);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, path);
+        var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
     }
 
@@ -103,21 +117,39 @@ internal class BillbeeRestClient : IBillbeeRestClient
             path += "?" + NameValueCollectionToQueryString(parameter);
         }
         var request = new HttpRequestMessage(HttpMethod.Delete, path);
-        var response = await _httpClient.SendAsync(request);
-        await HandleResponseAsync($"DELETE {path}", response);
+        _ = await SendRequestWithRetryAsync(request);
     }
     
-    private string? GetBasePath(string resource)
+    private string GetBasePath(string resource)
     {
         return $"{_config.BaseUrl}/{resource}";
     }
 
-    private static string? NameValueCollectionToQueryString(NameValueCollection nameValueCollection)
+    private static string NameValueCollectionToQueryString(NameValueCollection nameValueCollection)
     {
         return string.Join("&", nameValueCollection.AllKeys
             .Where(key => key != default)
             .Select(key => $"{Uri.EscapeDataString(key!)}={Uri.EscapeDataString(nameValueCollection[key]!)}"));
     }
+    
+    private async Task<HttpResponseMessage> SendRequestWithRetryAsync(HttpRequestMessage requestMessage)
+    {
+        for (var retry = 0; retry <= 3; retry++)
+        {
+            var response = await _httpClient.SendAsync(requestMessage);
+
+            if (response.StatusCode != HttpStatusCode.TooManyRequests || retry == 3)
+            {
+                await HandleResponseAsync($"{requestMessage.Method} {requestMessage.RequestUri}", response);
+                return response;
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
+        }
+
+        throw new InvalidOperationException("Max retries reached.");
+    }
+
 
     private static async Task HandleResponseAsync(string caller, HttpResponseMessage response)
     {

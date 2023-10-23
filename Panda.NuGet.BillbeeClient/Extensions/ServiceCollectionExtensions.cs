@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Panda.NuGet.BillbeeClient.Configs;
 using Panda.NuGet.BillbeeClient.Endpoints;
 using Panda.NuGet.BillbeeClient.Endpoints.Interfaces;
+using Panda.NuGet.BillbeeClient.Utilities;
 
 namespace Panda.NuGet.BillbeeClient.Extensions;
 
@@ -19,6 +20,7 @@ public static class ServiceCollectionExtensions
         ValidateConfig(config);
 
         serviceCollection.AddSingleton(config);
+        serviceCollection.AddScoped<IRateLimiter, RateLimiter>();
         
         serviceCollection.AddHttpClient(ClientName, client =>
         {
