@@ -2,6 +2,8 @@
 
 Panda.NuGet.BillbeeClient is a .NET Core library designed to provide an easy-to-use interface for communicating with the Billbee API. This project is a fork of the [billbeeio/billbee-csharp-sdk](https://github.com/billbeeio/billbee-csharp-sdk) repository.
 
+This library utilizes `System.Net.Http` and `System.Text.Json` for HTTP requests and JSON serialization/deserialization respectively, moving away from the use of RestSharp and Newtonsoft.Json which were used in the original repository.
+
 ## Installation
 
 The Panda.NuGet.BillbeeClient library is available as a NuGet package. You can install it via the NuGet package manager from the GitHub repository [pandapknaepel/billbee-csharp-sdk](https://github.com/pandapknaepel/billbee-csharp-sdk).
