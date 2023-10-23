@@ -152,7 +152,7 @@ namespace Panda.NuGet.BillbeeClient.Models
         
         public bool? IsDeactivated { get; set; }
         
-        public required List<BomSubArticleApiModel> BillOfMaterial { get; set; }
+        public required List<BomSubArticleApiModel> BillOfMaterial { get; set; } = new();
         public byte? Condition { get; set; }
         public decimal? WidthCm { get; set; }
         public decimal? LengthCm { get; set; }
