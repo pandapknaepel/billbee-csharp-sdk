@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using Panda.NuGet.BillbeeClient.Endpoints.Interfaces;
-using Panda.NuGet.BillbeeClient.Model;
-using Panda.NuGet.BillbeeClient.Model.Rechnungsdruck.WebApp.Model.Api;
+using Panda.NuGet.BillbeeClient.Models;
+using Panda.NuGet.BillbeeClient.Models.Rechnungsdruck.WebApp.Model.Api;
 
 namespace Panda.NuGet.BillbeeClient.Endpoints
 {

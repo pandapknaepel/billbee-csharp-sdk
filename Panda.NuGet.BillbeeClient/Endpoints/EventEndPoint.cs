@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using Panda.NuGet.BillbeeClient.Endpoints.Interfaces;
 using Panda.NuGet.BillbeeClient.Enums;
-using Panda.NuGet.BillbeeClient.Model;
+using Panda.NuGet.BillbeeClient.Models;
 
 namespace Panda.NuGet.BillbeeClient.Endpoints
 {
