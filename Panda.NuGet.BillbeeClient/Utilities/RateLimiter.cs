@@ -4,7 +4,7 @@ namespace Panda.NuGet.BillbeeClient.Utilities;
 
 public interface IRateLimiter
 {
-    Task ThrottleAsync(object key, int maxRequestsPerTimeRange = 6, int timeRangeInSeconds = 60);
+    Task ThrottleAsync(object key, int maxRequestsPerTimeRange, int timeRangeInSeconds);
 }
 
 public class RateLimiter : IRateLimiter
@@ -12,7 +12,7 @@ public class RateLimiter : IRateLimiter
     private readonly ConcurrentDictionary<object, SemaphoreSlim> _rateLimiters = new();
     private readonly ConcurrentDictionary<object, ConcurrentQueue<DateTimeOffset>> _requestTimestamps = new();
 
-    public async Task ThrottleAsync(object key, int maxRequestsPerTimeRange = 6, int timeRangeInSeconds = 60)
+    public async Task ThrottleAsync(object key, int maxRequestsPerTimeRange, int timeRangeInSeconds)
     {
         var rateLimiter = _rateLimiters.GetOrAdd(key, new SemaphoreSlim(maxRequestsPerTimeRange));
         var requestTimestamps = _requestTimestamps.GetOrAdd(key, new ConcurrentQueue<DateTimeOffset>());

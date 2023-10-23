@@ -20,13 +20,13 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
 
         public async Task<ApiResult<Order>> GetOrderAsync(string id, int articleTitleSource = 0)
         {
-            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}");
+            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}", 6, 60);
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/{id}?articleTitleSource={articleTitleSource}");
         }
         
         public async Task<ApiResult<Order>> GetOrderAsync(long id, int articleTitleSource = 0)
         {
-            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}");
+            await _rateLimiter.ThrottleAsync($"{nameof(GetOrderAsync)}-{id}", 6, 60);
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/{id}?articleTitleSource={articleTitleSource}");
         }
 
@@ -135,7 +135,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             bool includePositions = false,
             bool excludeTags = false)
         {
-            await _rateLimiter.ThrottleAsync($"{nameof(GetInvoiceListAsync)}-{page}-{minInvoiceDate}", 60);
+            await _rateLimiter.ThrottleAsync($"{nameof(GetInvoiceListAsync)}-{page}-{minInvoiceDate}", 1, 60);
             var parameters = new NameValueCollection();
 
             if (minInvoiceDate != null)
