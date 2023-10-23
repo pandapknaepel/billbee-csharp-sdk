@@ -29,7 +29,6 @@ public static class ServiceCollectionExtensions
         AddScopedClients(serviceCollection);
         
         serviceCollection.AddScoped<IBillbeeClient, BillbeeClient>();
-        serviceCollection.AddScoped<IBillbeeRestClient, BillbeeRestClient>();
     }
 
     private static void ValidateConfig(BillbeeApiConfig config)
@@ -57,6 +56,7 @@ public static class ServiceCollectionExtensions
 
     private static void AddScopedClients(IServiceCollection serviceCollection)
     {
+        serviceCollection.AddHttpClient<IBillbeeRestClient, BillbeeRestClient>(ClientName);
         serviceCollection.AddHttpClient<IAutomaticProvisionEndPoint, AutomaticProvisionEndPoint>(ClientName);
         serviceCollection.AddHttpClient<ICloudStoragesEndPoint, CloudStoragesEndPoint>(ClientName);
         serviceCollection.AddHttpClient<ICustomerAddressesEndPoint, CustomerAddressesEndPoint>(ClientName);

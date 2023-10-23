@@ -24,14 +24,10 @@ internal class BillbeeRestClient : IBillbeeRestClient
     private readonly BillbeeApiConfig _config;
     private readonly HttpClient _httpClient;
 
-    public BillbeeRestClient(BillbeeApiConfig config)
+    public BillbeeRestClient(BillbeeApiConfig billbeeApiConfig, HttpClient httpClient)
     {
-        _config = config;
-        _httpClient = new HttpClient();
-            
-        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{config.Username}:{config.Password}")));
-            
-        _httpClient.DefaultRequestHeaders.Add("X-Billbee-Api-Key", config.ApiKey);
+        _config = billbeeApiConfig;
+        _httpClient = httpClient;
     }
 
     public async Task<HttpStatusCode> GetAsync(string resource)
