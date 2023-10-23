@@ -107,12 +107,12 @@ internal class BillbeeRestClient : IBillbeeRestClient
         await HandleResponseAsync($"DELETE {path}", response);
     }
     
-    private string GetBasePath(string resource)
+    private string? GetBasePath(string resource)
     {
         return $"{_config.BaseUrl}/{resource}".Replace("//", "/");
     }
 
-    private static string NameValueCollectionToQueryString(NameValueCollection nameValueCollection)
+    private static string? NameValueCollectionToQueryString(NameValueCollection nameValueCollection)
     {
         return string.Join("&", nameValueCollection.AllKeys
             .Where(key => key != default)
