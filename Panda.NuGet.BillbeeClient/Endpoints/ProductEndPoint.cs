@@ -34,7 +34,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
                 updateStockModel);
         }
 
-        public async Task<ApiResult<GetReservedAmountResult>> GetReservedAmountAsync(string id, string lookupBy = "id",
+        public async Task<ApiResult<GetReservedAmountResult>> GetReservedAmountAsync(string id, string? lookupBy = "id",
             long? stockId = null)
         {
             var parameters = new NameValueCollection

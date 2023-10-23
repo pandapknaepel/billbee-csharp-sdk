@@ -43,7 +43,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints.Interfaces
         /// <param name="partner">If set, this is the internal partner name, this order should be searched at.</param>
         /// <param name="id">The external id, that should be used for selection</param>
         /// <returns>Details of the order</returns>
-        Task<ApiResult<Order>> GetOrderByExternalIdAndPartnerAsync(string partner, string id);
+        Task<ApiResult<Order>> GetOrderByExternalIdAndPartnerAsync(string partner, string? id);
 
         /// <summary>
         /// Delivers a list of orders
@@ -64,9 +64,9 @@ namespace Panda.NuGet.BillbeeClient.Endpoints.Interfaces
             DateTime? maxOrderDate = null,
             int page = 1,
             int pageSize = 50,
-            List<long> shopId = null,
-            List<OrderStateEnum> orderStateId = null,
-            List<string> tag = null,
+            List<long>? shopId = null,
+            List<OrderStateEnum>? orderStateId = null,
+            List<string>? tag = null,
             long? minimumBillBeeOrderId = null,
             DateTime? modifiedAtMin = null,
             DateTime? modifiedAtMax = null,
@@ -91,9 +91,9 @@ namespace Panda.NuGet.BillbeeClient.Endpoints.Interfaces
             DateTime? minInvoiceDate = null,
             DateTime? maxInvoiceDate = null,
             int page = 1, int pageSize = 50,
-            List<long> shopId = null,
-            List<int> orderStateId = null,
-            List<string> tag = null,
+            List<long>? shopId = null,
+            List<int>? orderStateId = null,
+            List<string>? tag = null,
             DateTime? minPayDate = null,
             DateTime? maxPayDate = null,
             bool includePositions = false,
@@ -177,7 +177,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints.Interfaces
         /// <param name="orderId">Order to trigger the event for</param>
         /// <param name="eventName">Name of the event to trigger</param>
         /// <param name="delayInMinutes">If set, the trigger will by delayed for the given number of minutes</param>
-        Task CreateEventAtOrderAsync(long orderId, string eventName, uint delayInMinutes = 0);
+        Task CreateEventAtOrderAsync(long orderId, string? eventName, uint delayInMinutes = 0);
 
         /// <summary>
         /// Gets a list of layout templates

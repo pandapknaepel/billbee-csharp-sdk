@@ -35,7 +35,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints.Interfaces
         /// <param name="lookupBy">Either the value id or the value sku to specify the meaning of the id parameter</param>
         /// <param name="stockId">Optional the stock id if the multi stock feature is enabled</param>
         /// <returns></returns>
-        Task<ApiResult<GetReservedAmountResult>> GetReservedAmountAsync(string id, string lookupBy = "id", long? stockId = null);
+        Task<ApiResult<GetReservedAmountResult>> GetReservedAmountAsync(string id, string? lookupBy = "id", long? stockId = null);
 
         /// <summary>
         /// Updates the stock code / stock location of the article

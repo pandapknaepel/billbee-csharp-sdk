@@ -35,7 +35,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/findbyextref/{id}");
         }
 
-        public async Task<ApiResult<Order>> GetOrderByExternalIdAndPartnerAsync(string partner, string id)
+        public async Task<ApiResult<Order>> GetOrderByExternalIdAndPartnerAsync(string partner, string? id)
         {
             return await _restClient.GetAsync<ApiResult<Order>>($"/orders/find/{id}/{partner}");
         }
@@ -44,9 +44,9 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             DateTime? maxOrderDate = null,
             int page = 1,
             int pageSize = 50,
-            List<long> shopId = null,
-            List<OrderStateEnum> orderStateId = null,
-            List<string> tag = null,
+            List<long>? shopId = null,
+            List<OrderStateEnum>? orderStateId = null,
+            List<string>? tag = null,
             long? minimumBillBeeOrderId = null,
             DateTime? modifiedAtMin = null,
             DateTime? modifiedAtMax = null,
@@ -117,9 +117,9 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             DateTime? minInvoiceDate = null,
             DateTime? maxInvoiceDate = null,
             int page = 1, int pageSize = 50,
-            List<long> shopId = null,
-            List<int> orderStateId = null,
-            List<string> tag = null,
+            List<long>? shopId = null,
+            List<int>? orderStateId = null,
+            List<string>? tag = null,
             DateTime? minPayDate = null,
             DateTime? maxPayDate = null,
             bool includePositions = false,
@@ -245,7 +245,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             await _restClient.PostAsync($"/orders/{orderId}/send-message", message);
         }
 
-        public async Task CreateEventAtOrderAsync(long orderId, string eventName, uint delayInMinutes = 0)
+        public async Task CreateEventAtOrderAsync(long orderId, string? eventName, uint delayInMinutes = 0)
         {
             var model = new TriggerEventContainer
             {

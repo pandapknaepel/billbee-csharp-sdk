@@ -20,7 +20,7 @@ namespace Panda.NuGet.BillbeeClient.Endpoints
             DateTime? maxDate = null,
             int page = 1,
             int pageSize = 50,
-            List<EventTypeEnum> typeIds = null,
+            List<EventTypeEnum>? typeIds = null,
             long? orderId = null)
         {
             var parameters = new NameValueCollection();
