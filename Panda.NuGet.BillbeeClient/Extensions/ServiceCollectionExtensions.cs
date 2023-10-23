@@ -57,19 +57,19 @@ public static class ServiceCollectionExtensions
     private static void AddScopedClients(IServiceCollection serviceCollection)
     {
         serviceCollection.AddHttpClient<IBillbeeRestClient, BillbeeRestClient>(ClientName);
-        serviceCollection.AddHttpClient<IAutomaticProvisionEndPoint, AutomaticProvisionEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<ICloudStoragesEndPoint, CloudStoragesEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<ICustomerAddressesEndPoint, CustomerAddressesEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<ICustomerEndPoint, CustomerEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IEnumEndPoint, EnumEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IEventEndPoint, EventEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IOrderEndPoint, OrderEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IProductEndPoint, ProductEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<ISearchEndPoint, SearchEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IShipmentEndPoint, ShipmentEndPoint>(ClientName);
-        serviceCollection.AddHttpClient<IWebhookEndPoint, WebhookEndPoint>(ClientName);
+        serviceCollection.AddScoped<IAutomaticProvisionEndPoint, AutomaticProvisionEndPoint>();
+        serviceCollection.AddScoped<ICloudStoragesEndPoint, CloudStoragesEndPoint>();
+        serviceCollection.AddScoped<ICustomerAddressesEndPoint, CustomerAddressesEndPoint>();
+        serviceCollection.AddScoped<ICustomerEndPoint, CustomerEndPoint>();
+        serviceCollection.AddScoped<IEnumEndPoint, EnumEndPoint>();
+        serviceCollection.AddScoped<IEventEndPoint, EventEndPoint>();
+        serviceCollection.AddScoped<IOrderEndPoint, OrderEndPoint>();
+        serviceCollection.AddScoped<IProductEndPoint, ProductEndPoint>();
+        serviceCollection.AddScoped<ISearchEndPoint, SearchEndPoint>();
+        serviceCollection.AddScoped<IShipmentEndPoint, ShipmentEndPoint>();
+        serviceCollection.AddScoped<IWebhookEndPoint, WebhookEndPoint>();
     }
-
+    
     private static void ConfigureHttpClient(HttpClient httpClient, BillbeeApiConfig config)
     {
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
