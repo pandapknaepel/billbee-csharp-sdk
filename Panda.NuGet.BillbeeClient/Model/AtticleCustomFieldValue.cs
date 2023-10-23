@@ -6,10 +6,10 @@
 
         public long? DefinitionId;
 
-        public ArticleCustomFieldDefinition Definition;
+        public ArticleCustomFieldDefinition? Definition;
 
         public long? ArticleId;
 
-        public object Value;
+        public object? Value;
     }
 }

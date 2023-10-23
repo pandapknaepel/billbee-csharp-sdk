@@ -8,11 +8,11 @@
         /// <summary>
         /// Text representation in the given language
         /// </summary>
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// ISO language code, that defines the language, the content in <<see cref="Text"/> written in.
         /// </summary>
-        public string LanguageCode { get; set; }
+        public string? LanguageCode { get; set; }
     }
 }

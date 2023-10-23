@@ -1,4 +1,6 @@
-﻿namespace Panda.NuGet.BillbeeClient.Model
+﻿using System.Text.Json.Serialization;
+
+namespace Panda.NuGet.BillbeeClient.Model
 {
     namespace Rechnungsdruck.WebApp.Model.Api
     {
@@ -10,17 +12,17 @@
             /// <summary>
             ///  Name of the shipping provider, to use
             /// </summary>
-            public string ProviderName { get; set; }
+            public string? ProviderName { get; set; }
 
             /// <summary>
             /// Product code of the shipping provider for the product, to use as shipment method
             /// </summary>
-            public string ProductCode { get; set; }
+            public string? ProductCode { get; set; }
 
             /// <summary>
             /// Name of the cloud printer, to send the labels to
             /// </summary>
-            public string PrinterName { get; set; }
+            public string? PrinterName { get; set; }
             
             /// <summary>
             /// The id of a connected Cloudprinter to sent the export docs to
@@ -30,22 +32,22 @@
             /// <summary>
             /// List of services, to attach to the shipping product
             /// </summary>
-            public List<object> Services { get; set; }
+            public List<object>? Services { get; set; }
 
             /// <summary>
             /// Address of the adressee
             /// </summary>
-            public ShipmentAddress ReceiverAddress { get; set; }
+            public ShipmentAddress? ReceiverAddress { get; set; }
 
             /// <summary>
             /// Reference number for this parcel
             /// </summary>
-            public string ClientReference { get; set; }
+            public string? ClientReference { get; set; }
 
             /// <summary>
             /// Number of the customer, this parcel should be send to.
             /// </summary>
-            public string CustomerNumber { get; set; }
+            public string? CustomerNumber { get; set; }
 
             /// <summary>
             /// gross weight of the parcel
@@ -58,14 +60,14 @@
             public decimal OrderSum { get; set; }
 
             /// <summary>
-            /// Currency code, of the currency, the order was made in. <<see cref="OrderSum"/>
+            /// Currency code, of the currency, the order was made in. <see cref="OrderSum"/>
             /// </summary>
-            public string OrderCurrencyCode { get; set; }
+            public string? OrderCurrencyCode { get; set; }
 
             /// <summary>
             /// For export parcels, the content has to be defined
             /// </summary>
-            public string Content { get; set; }
+            public string? Content { get; set; }
 
             /// <summary>
             /// Date and time of shipment
@@ -75,14 +77,15 @@
             /// <summary>
             /// The Id of the carrier, the parcel will be send with
             /// </summary>
-            public byte shippingCarrier { get; set; }
+            [JsonPropertyName("shippingCarrier")]
+            public byte? ShippingCarrier { get; set; }
             
             /// <summary>
             /// The value of the shipments content (net)
             /// </summary>
             public decimal TotalNet { get; set; }
             
-            public ShipmentDimensions Dimension { get; set; }
+            public ShipmentDimensions? Dimension { get; set; }
         }
     }
 }

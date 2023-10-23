@@ -8,7 +8,7 @@
         /// <summary>
         /// The id, the shipment got from the provider
         /// </summary>
-        public string ShippingId { get; set; }
+        public string? ShippingId { get; set; }
 
         /// <summary>
         /// The id of the order, this shipment should be attached to
@@ -18,7 +18,7 @@
         /// <summary>
         /// A note, that should be attached to the shipment
         /// </summary>
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         /// <summary>
         /// If applicable, that internal id of the provider, the shipment was send with.

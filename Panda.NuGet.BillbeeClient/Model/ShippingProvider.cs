@@ -1,20 +1,25 @@
-﻿namespace Panda.NuGet.BillbeeClient.Model
+﻿using System.Text.Json.Serialization;
+
+namespace Panda.NuGet.BillbeeClient.Model
 {
     public class ShippingProvider
     {
         /// <summary>
         /// internal id of this provider
         /// </summary>
-        public long id { get; set; }
+        [JsonPropertyName("id")]
+        public long? Id { get; set; }
 
         /// <summary>
         /// Name of this provider
         /// </summary>
-        public string name { get; set; }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
 
         /// <summary>
         /// Available products
         /// </summary>
-        public List<ShippingProduct> products { get; set; }
+        [JsonPropertyName("naproductsme")]
+        public List<ShippingProduct>? Products { get; set; }
     }
 }

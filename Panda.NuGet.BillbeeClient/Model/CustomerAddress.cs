@@ -9,21 +9,21 @@
         /// </summary>
         public int AddressType { get; set; }
         public long? CustomerId { get; set; }
-        public string Company { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Name2 { get; set; }
-        public string Street { get; set; }
-        public string Housenumber { get; set; }
-        public string Zip { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string CountryCode { get; set; }
-        public string Email { get; set; }
-        public string Tel1 { get; set; }
-        public string Tel2 { get; set; }
-        public string Fax { get; set; }
-        public string FullAddr { get; }
-        public string AddressAddition { get; set; }
+        public string? Company { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Name2 { get; set; }
+        public string? Street { get; set; }
+        public string? Housenumber { get; set; }
+        public string? Zip { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? CountryCode { get; set; }
+        public string? Email { get; set; }
+        public string? Tel1 { get; set; }
+        public string? Tel2 { get; set; }
+        public string? Fax { get; set; }
+        public string? FullAddr { get; }
+        public string? AddressAddition { get; set; }
     }
 }

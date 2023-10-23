@@ -12,9 +12,9 @@
     {
         public long? Id;
 
-        public string Name;
+        public string? Name;
 
-        public object Configuration;
+        public object? Configuration;
 
         public ApiArticleCustomFieldType? Type;
 

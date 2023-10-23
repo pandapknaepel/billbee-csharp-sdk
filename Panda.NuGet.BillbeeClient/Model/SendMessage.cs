@@ -33,6 +33,6 @@
         /// <summary>
         /// An alternative recipient email address
         /// </summary>
-        public string AlternativeMail = null;
+        public string? AlternativeMail = null;
     }
 }

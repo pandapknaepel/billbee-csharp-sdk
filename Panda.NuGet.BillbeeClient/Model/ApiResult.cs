@@ -1,4 +1,5 @@
-﻿namespace Panda.NuGet.BillbeeClient.Model
+﻿// ReSharper disable InconsistentNaming
+namespace Panda.NuGet.BillbeeClient.Model
 {
     /// <summary>
     /// Single entry result set for api requests
@@ -37,17 +38,17 @@
         /// <summary>
         /// If a request failed, a detailed message can be found here.
         /// </summary>
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         /// <summary>
-        /// If a request failed, the failure cause can be found here <<see cref="ErrorCodeEnum"/>
+        /// If a request failed, the failure cause can be found here <see cref="ErrorCodeEnum"/>
         /// </summary>
         public ErrorCodeEnum ErrorCode { get; set; }
 
         /// <summary>
         /// Response content to a request.
         /// </summary>
-        public T Data { get; set; }
+        public T? Data { get; set; }
     }
 
     /// <summary>
@@ -85,6 +86,6 @@
         /// <summary>
         /// Shows the relation of the delivered content in terms of content paging.
         /// </summary>
-        public PagingInformation Paging { get; set; }
+        public PagingInformation? Paging { get; set; }
     }
 }

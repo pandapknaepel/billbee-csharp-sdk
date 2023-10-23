@@ -8,7 +8,7 @@
         /// <summary>
         /// Url where this image is located
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// Defines, wether this image should be used as default image, or not.
@@ -23,6 +23,6 @@
         /// <summary>
         /// The if of the image in the external system, the corresponding order was received from
         /// </summary>
-        public string ExternalId { get; set; }
+        public string? ExternalId { get; set; }
     }
 }

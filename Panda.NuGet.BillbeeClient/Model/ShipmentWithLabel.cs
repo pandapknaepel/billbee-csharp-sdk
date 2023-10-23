@@ -24,7 +24,7 @@
         /// <summary>
         /// Optional. Name of a cloud drive or printer, that should be used to automatically store the label after creation.
         /// </summary>
-        public string PrinterName { get; set; }
+        public string? PrinterName { get; set; }
         /// <summary>
         /// Optional. Total weight of the parcel in gram
         /// </summary>
@@ -36,10 +36,10 @@
         /// <summary>
         /// Optional. If given, this reference will be added to the parcel process as individual reference.
         /// </summary>
-        public string ClientReference { get; set; }
+        public string? ClientReference { get; set; }
         /// <summary>
         /// Optional. The dimension of the package.
         /// </summary>
-        public ShipmentDimensions Dimension { get; set; }
+        public ShipmentDimensions? Dimension { get; set; }
     }
 }

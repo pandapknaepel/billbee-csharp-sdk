@@ -10,27 +10,27 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Number that is printed as invoice number on the invoice
         /// </summary>
-        public string InvoiceNumber { get; set; }
+        public string? InvoiceNumber { get; set; }
 
         /// <summary>
         /// Defines, wether this is an invoice or a creditnote
         /// </summary>
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Invoice address last name
         /// </summary>
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         /// <summary>
         /// Invoice address first name
         /// </summary>
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         /// <summary>
         /// Invoice address company
         /// </summary>
-        public string Company { get; set; }
+        public string? Company { get; set; }
 
         /// <summary>
         /// Customer number of the addressed customer
@@ -55,7 +55,7 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Definition of the currency this invoice ist based upon
         /// </summary>
-        public string Currency { get; set; }
+        public string? Currency { get; set; }
 
         /// <summary>
         /// Total gross value of this invoice
@@ -70,27 +70,27 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The number of the corresponding order
         /// </summary>
-        public string OrderNumber { get; set; }
+        public string? OrderNumber { get; set; }
 
         /// <summary>
         /// If applicable, the id of the payment transaction
         /// </summary>
-        public string TransactionId { get; set; }
+        public string? TransactionId { get; set; }
 
         /// <summary>
         /// Contact e-mail address of the customer
         /// </summary>
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// The name of the shop, the original order came from
         /// </summary>
-        public string ShopName { get; set; }
+        public string? ShopName { get; set; }
 
         /// <summary>
-        /// All positions, that belong to this invoice <<see cref="InvoicePosition"/>
+        /// All positions, that belong to this invoice <see cref="InvoicePosition"/>
         /// </summary>
-        public List<InvoicePosition> Positions { get; set; }
+        public List<InvoicePosition>? Positions { get; set; }
 
         /// <summary>
         /// Date date, when this order was payed. If null, the order has not been payed for yet.

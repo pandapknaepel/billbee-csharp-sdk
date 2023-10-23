@@ -2,7 +2,7 @@
 {
     public class DeletedImages
     {
-        public List<long> Deleted { get; set; }
-        public List<long> NotFound { get; set; }
+        public List<long>? Deleted { get; set; }
+        public List<long>? NotFound { get; set; }
     }
 }

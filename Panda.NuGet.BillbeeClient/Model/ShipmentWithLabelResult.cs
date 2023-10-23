@@ -9,28 +9,28 @@
         /// <summary>
         /// Reference number of the carrier or provider
         /// </summary>
-        public string OrderReference { get; set; }
+        public string? OrderReference { get; set; }
         /// <summary>
         /// Order or tracking number of the carrier or provider
         /// </summary>
-        public string ShippingId { get; set; }
+        public string? ShippingId { get; set; }
         /// <summary>
         /// URL to track the shipment
         /// </summary>
-        public string TrackingUrl { get; set; }
+        public string? TrackingUrl { get; set; }
         /// <summary>
         /// If applicable, the pdf data of the label as base 64 encoded data.
         /// </summary>
-        public byte[] LabelDataPdf { get; set; }
+        public byte[]? LabelDataPdf { get; set; }
         /// <summary>
         /// If applicable, the pdf data of the export documents as base 64 encoded data.
         /// </summary>
-        public byte[] ExportDocsPdf { get; set; }
+        public byte[]? ExportDocsPdf { get; set; }
 
         /// <summary>
         /// Text representation of the used carrier
         /// </summary>
-        public string Carrier { get; set; }
+        public string? Carrier { get; set; }
 
         /// <summary>
         /// The datetime, defining, when the order should be send

@@ -8,7 +8,7 @@
         /// <summary>
         ///  The url, this image is located
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// The id of this image
@@ -18,12 +18,12 @@
         /// <summary>
         /// Path of external thumbnail, will be ignored, if posting to billbee.
         /// </summary>
-        public string ThumbPathExt { get; set; }
+        public string? ThumbPathExt { get; set; }
 
         /// <summary>
         /// Url of the thumbail, will be ignored, if posting to billbee.
         /// </summary>
-        public string ThumbUrl { get; set; }
+        public string? ThumbUrl { get; set; }
 
         /// <summary>
         /// If more than one image is given, the position defines the order.

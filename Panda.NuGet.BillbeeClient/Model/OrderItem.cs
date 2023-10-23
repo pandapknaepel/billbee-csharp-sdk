@@ -5,9 +5,9 @@
         /// <summary>
         /// Id der Einzeltransaktion. Wird nur von Ebay benötigt, um zusammengefasste Bestellungen zu erkennen  OR  Id of the individual transaction. Only required by Ebay to detect aggregated orders
         /// </summary>
-        public string TransactionId { get; set; }
+        public string? TransactionId { get; set; }
 
-        public OrderItemProduct Product { get; set; }
+        public OrderItemProduct? Product { get; set; }
         public decimal Quantity { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal TaxAmount { get; set; }
@@ -18,7 +18,7 @@
         /// </summary>
         public decimal Discount { get; set; }
 
-        public List<OrderItemAttribute> Attributes { get; set; }
+        public List<OrderItemAttribute>? Attributes { get; set; }
         public bool GetPriceFromArticleIfAny { get; set; }
 
         /// <summary>
@@ -26,7 +26,7 @@
         /// </summary>
         public bool IsCoupon { get; set; }
 
-        public string ShippingProfileId { get; set; }
+        public string? ShippingProfileId { get; set; }
 
         public override string ToString()
         {
@@ -50,6 +50,6 @@
         public decimal UnrebatedTotalPrice { get; set; }
 
         /// <summary>Contains the used serial number</summary>
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
     }
 }

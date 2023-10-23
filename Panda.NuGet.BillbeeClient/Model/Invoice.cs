@@ -8,17 +8,17 @@
         /// <summary>
         /// The number of the corresponding order
         /// </summary>
-        public string OrderNumber { get; set; }
+        public string? OrderNumber { get; set; }
 
         /// <summary>
         /// Number that is printed as invoice number on the invoice
         /// </summary>
-        public string InvoiceNumber { get; set; }
+        public string? InvoiceNumber { get; set; }
 
         /// <summary>
         /// Contains the PDF representation of the invoice, if it was requested.
         /// </summary>
-        public byte[] PDFData { get; set; }
+        public byte[]? PDFData { get; set; }
 
         /// <summary>
         /// Date of the invoice
@@ -38,6 +38,6 @@
         /// <summary>
         /// If the pdf file was not attached as byte[], it can be downloaded from this url
         /// </summary>
-        public string PdfDownloadUrl { get; set; }
+        public string? PdfDownloadUrl { get; set; }
     }
 }

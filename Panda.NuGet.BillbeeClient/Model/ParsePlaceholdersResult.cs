@@ -2,6 +2,6 @@
 {
     public class ParsePlaceholdersResult
     {
-        public string Result { get; set; }
+        public string? Result { get; set; }
     }
 }

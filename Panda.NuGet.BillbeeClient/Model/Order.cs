@@ -7,7 +7,7 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// List of ids, that reference to the shippings, that have been made for this order.
         /// </summary>
-        public List<OrderShippingId> ShippingIds { get; set; }
+        public List<OrderShippingId>? ShippingIds { get; set; }
 
         /// <summary>
         /// Kunde hat Verlust des Widerrufrechts akzeptiert OR Customer accepts loss due to withdrawal
@@ -17,13 +17,13 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Id of the order in the external system (marketplace)
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Ordernumber of the order in the external system (marketplace)
         /// </summary>
         /// <remarks>Is often the same as the id</remarks>
-        public string OrderNumber { get; set; }
+        public string? OrderNumber { get; set; }
 
         /// <summary>
         /// The state, the order is currently in
@@ -58,26 +58,26 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Internal comment to this order
         /// </summary>
-        public string SellerComment { get; set; }
+        public string? SellerComment { get; set; }
 
         /// <summary>
         /// Comments and messages between customer and shop owner
         /// </summary>
-        public List<Comment> Comments { get; set; }
+        public List<Comment>? Comments { get; set; }
 
         /// <summary>
         /// Prefix used, to create the invoice number
         /// </summary>
-        public string InvoiceNumberPrefix { get; set; }
+        public string? InvoiceNumberPrefix { get; set; }
 
         /// <summary>
         /// Postfix used, to create the invoice number
         /// </summary>
-        public string InvoiceNumberPostfix { get; set; }
+        public string? InvoiceNumberPostfix { get; set; }
 
         /// <summary>
         /// Auto generated number, to build the invoice number.
-        /// <<see cref="InvoiceNumberPrefix"/><<see cref="InvoiceNumber"/><<see cref="InvoiceNumberPostfix"/>
+        /// <see cref="InvoiceNumberPrefix"/><see cref="InvoiceNumber"/><see cref="InvoiceNumberPostfix"/>
         /// </summary>
         public int? InvoiceNumber { get; set; }
 
@@ -89,12 +89,12 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Addressee of the invoice
         /// </summary>
-        public Address InvoiceAddress { get; set; }
+        public Address? InvoiceAddress { get; set; }
 
         /// <summary>
         /// Addressee, where the order was/is shipped to
         /// </summary>
-        public Address ShippingAddress { get; set; }
+        public Address? ShippingAddress { get; set; }
 
         /// <summary>
         /// The payment method, used to pay this order
@@ -114,11 +114,11 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The list of items purchased like shirt , pant , toys etc
         /// </summary>
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
 
-        public string Currency { get; set; }
-        public OrderUser Seller { get; set; }
-        public OrderUser Buyer { get; set; }
+        public string? Currency { get; set; }
+        public OrderUser? Seller { get; set; }
+        public OrderUser? Buyer { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
         public decimal? TaxRate1 { get; set; }
@@ -134,12 +134,12 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         ///
         /// </summary>
-        public string VatId { get; set; }
+        public string? VatId { get; set; }
 
         /// <summary>
         /// List of individual tags, that are appended to this order.
         /// </summary>
-        public List<string> Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
 
         public decimal? ShipWeightKg { get; set; }
@@ -147,7 +147,7 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Code of the language, this order was created in
         /// </summary>
-        public string LanguageCode { get; set; }
+        public string? LanguageCode { get; set; }
 
         /// <summary>
         /// Total amount paid by the customer for this order.
@@ -157,12 +157,12 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Internal Id for the shipping profile for that order
         /// </summary>
-        public string ShippingProfileId { get; set; }
+        public string? ShippingProfileId { get; set; }
 
         /// <summary>
         /// Display Name of Shipping profile, if available
         /// </summary>
-        public string ShippingProfileName { get; set; }
+        public string? ShippingProfileName { get; set; }
 
 
         /// <summary>
@@ -178,52 +178,52 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The Name for of used shipping provider
         /// </summary>
-        public string ShippingProviderName { get; set; }
+        public string? ShippingProviderName { get; set; }
 
         /// <summary>
         /// The Name of the used shipping product
         /// </summary>
-        public string ShippingProviderProductName { get; set; }
+        public string? ShippingProviderProductName { get; set; }
 
         /// <summary>
         /// A textfield optionaly filled with a payment instruction text for printout on the invoice (z.B. Ebay Kauf auf Rechnung)
         /// </summary>
-        public string PaymentInstruction { get; set; }
+        public string? PaymentInstruction { get; set; }
 
         /// <summary>
         /// An optional Order Id (externalid) for an order if this is a cancel order (shopify only at the moment)
         /// </summary>
-        public string IsCancelationFor { get; set; }
+        public string? IsCancelationFor { get; set; }
 
-        public string PaymentTransactionId { get; set; }
+        public string? PaymentTransactionId { get; set; }
 
         /// <summary>
         /// An optional Country ISO2 Code of the country where order is shipped from (FBA)
         /// </summary>
-        public string DeliverySourceCountryCode { get; set; }
+        public string? DeliverySourceCountryCode { get; set; }
 
         /// <summary>
         /// An optional multiline text which is printed on the invoice
         /// </summary>
-        public string CustomInvoiceNote { get; set; }
+        public string? CustomInvoiceNote { get; set; }
 
         /// <summary>
         /// The customer number (not to be confused with the id of the customer)
         /// </summary>
-        public string CustomerNumber { get; set; }
+        public string? CustomerNumber { get; set; }
         
         /// <summary>
         /// The Customer object connected with the order
         /// </summary>
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
         
         /// <summary>
         /// List of payments, associated with this order
         /// </summary>
-        public List<OrderPayment> Payments { get; set; }
+        public List<OrderPayment>? Payments { get; set; }
         
         public decimal AdjustmentCost { get; set; }
-        public string AdjustmentReason { get; set; }
+        public string? AdjustmentReason { get; set; }
         
         /// <summary>
         /// If set, the order was already archived at the given date. Further modification is disabled.
@@ -233,10 +233,10 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The vat-id, that was given by the customer to fulfill this order
         /// </summary>
-        public string CustomerVatId { get; set; }
+        public string? CustomerVatId { get; set; }
 
         /// <summary>An optional code for the distribution center delivering this order</summary>
-        public string DistributionCenter { get; set; }
+        public string? DistributionCenter { get; set; }
         
         /// <summary>
         /// Date of the last update, the order got
@@ -246,12 +246,12 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The vat-id, that should be displayed on the invoice and other order documents
         /// </summary>
-        public string MerchantVatId { get; set; }
+        public string? MerchantVatId { get; set; }
         
         /// <summary>
         /// List of history events of this order
         /// </summary>
-        public List<HistoryEntry> History { get; set; }
+        public List<HistoryEntry>? History { get; set; }
         
         public decimal RebateDifference { get; set; }
         
@@ -264,9 +264,9 @@ namespace Panda.NuGet.BillbeeClient.Model
     public class HistoryEntry
     {
         public DateTime Created { get; set; }
-        public string EventTypeName { get; set; }
-        public string Text { get; set; }
-        public string EmployeeName { get; set; }
+        public string? EventTypeName { get; set; }
+        public string? Text { get; set; }
+        public string? EmployeeName { get; set; }
         public int? TypeId { get; set; }
     }
 }

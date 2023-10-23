@@ -10,12 +10,12 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Text to display in the invoice
         /// </summary>
-        public List<MultiLanguageString> InvoiceText { get; set; }
+        public List<MultiLanguageString>? InvoiceText { get; set; }
 
         /// <summary>
         /// Name of the manufacturer, if given
         /// </summary>
-        public string Manufacturer { get; set; }
+        public string? Manufacturer { get; set; }
 
         /// <summary>
         /// Internal if of this product
@@ -25,27 +25,27 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// Name of the product
         /// </summary>
-        public List<MultiLanguageString> Title { get; set; }
+        public List<MultiLanguageString>? Title { get; set; }
 
         /// <summary>
         /// Description of the product
         /// </summary>
-        public List<MultiLanguageString> Description { get; set; }
+        public List<MultiLanguageString>? Description { get; set; }
 
         /// <summary>
         /// Short description of the product, to show in summaries
         /// </summary>
-        public List<MultiLanguageString> ShortDescription { get; set; }
+        public List<MultiLanguageString>? ShortDescription { get; set; }
 
         /// <summary>
         /// Basic attributes, to define this product
         /// </summary>
-        public List<MultiLanguageString> BasicAttributes { get; set; }
+        public List<MultiLanguageString>? BasicAttributes { get; set; }
 
         /// <summary>
         /// Images of this product
         /// </summary>
-        public List<ArticleImage> Images { get; set; }
+        public List<ArticleImage>? Images { get; set; }
 
         /// <summary>
         /// Index of the correct vat rate, to attach to this product.
@@ -80,23 +80,26 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// </summary>
         public decimal? StockWarning { get; set; }
 
-        public string SKU { get; set; }
-        public string EAN { get; set; }
+        [JsonPropertyName("SKU")]
+        public string? Sku { get; set; }
+        
+        [JsonPropertyName("EAN")]
+        public string? Ean { get; set; }
 
         /// <summary>
         /// A list of materials, this products consists of
         /// </summary>
-        public List<MultiLanguageString> Materials { get; set; }
+        public List<MultiLanguageString>? Materials { get; set; }
 
         /// <summary>
         /// List if tags, that are marking this product
         /// </summary>
-        public List<MultiLanguageString> Tags { get; set; }
+        public List<MultiLanguageString>? Tags { get; set; }
 
         /// <summary>
         /// Sources, this article is attached to
         /// </summary>
-        public List<ArticleSource> Sources { get; set; }
+        public List<ArticleSource>? Sources { get; set; }
 
         /// <summary>
         /// The gross weight of this article
@@ -110,13 +113,13 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The stock code, where this article is stored
         /// </summary>
-        public string StockCode { get; set; }
+        public string? StockCode { get; set; }
 
         public decimal? StockReduceItemsPerSale { get; set; }
-        public List<StockArticle> Stocks { get; set; }
-        public ArticleCategory Category1 { get; set; }
-        public ArticleCategory Category2 { get; set; }
-        public ArticleCategory Category3 { get; set; }
+        public List<StockArticle>? Stocks { get; set; }
+        public ArticleCategory? Category1 { get; set; }
+        public ArticleCategory? Category2 { get; set; }
+        public ArticleCategory? Category3 { get; set; }
         public byte Type { get; set; }
         public short? Unit { get; set; }
         public decimal? UnitsPerItem { get; set; }
@@ -137,19 +140,19 @@ namespace Panda.NuGet.BillbeeClient.Model
         public byte? DeliveryTime { get; set; }
         public byte? Recipient { get; set; }
         public byte? Occasion { get; set; }
-        public string CountryOfOrigin { get; set; }
+        public string? CountryOfOrigin { get; set; }
         
         [Obsolete("Use ExportDescriptionMultiLanguage instead.")]
-        public string ExportDescription { get; set; }
-        public List<MultiLanguageString> ExportDescriptionMultiLanguage { get; set; } = new List<MultiLanguageString>();
+        public string? ExportDescription { get; set; }
+        public List<MultiLanguageString> ExportDescriptionMultiLanguage { get; set; } = new();
         
-        public string TaricNumber { get; set; }
+        public string? TaricNumber { get; set; }
 
-        public List<AtticleCustomFieldValue> CustomFields { get; set; } = new List<AtticleCustomFieldValue>();
+        public List<AtticleCustomFieldValue> CustomFields { get; set; } = new();
         
         public bool? IsDeactivated { get; set; }
         
-        public List<BomSubArticleApiModel> BillOfMaterial { get; set; }
+        public required List<BomSubArticleApiModel> BillOfMaterial { get; set; }
         public byte? Condition { get; set; }
         public decimal? WidthCm { get; set; }
         public decimal? LengthCm { get; set; }
@@ -163,6 +166,8 @@ namespace Panda.NuGet.BillbeeClient.Model
     {
         public decimal Amount { get; set; }
         public long? ArticleId { get; set; }
-        public string SKU { get; set; }
+        
+        [JsonPropertyName("SKU")]
+        public string? Sku { get; set; }
     }
 }

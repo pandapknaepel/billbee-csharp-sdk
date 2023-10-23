@@ -8,12 +8,12 @@
         /// <summary>
         /// Name of the source
         /// </summary>
-        public string Source { get; set; }
+        public string? Source { get; set; }
 
         /// <summary>
         /// The id on the source
         /// </summary>
-        public string SourceId { get; set; }
+        public string? SourceId { get; set; }
 
         /// <summary>
         /// The internal id of this article source definition
@@ -23,7 +23,7 @@
         /// <summary>
         /// Name of the api account, this source belongs to
         /// </summary>
-        public string ApiAccountName { get; set; }
+        public string? ApiAccountName { get; set; }
 
         /// <summary>
         /// Id of the api account, this source belongs to

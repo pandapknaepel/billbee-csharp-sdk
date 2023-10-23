@@ -8,12 +8,12 @@
         /// <summary>
         /// Id if the shipment
         /// </summary>
-        public string ShippingId { get; set; }
+        public string? ShippingId { get; set; }
 
         /// <summary>
         /// The name of the shipping provider
         /// </summary>
-        public string Shipper { get; set; }
+        public string? Shipper { get; set; }
 
         /// <summary>
         /// The date, this shipment was created
@@ -23,7 +23,7 @@
         /// <summary>
         /// The Tracking url
         /// </summary>
-        public string TrackingUrl { get; set; }
+        public string? TrackingUrl { get; set; }
 
         /// <summary>
         /// The id of the used shipping provider

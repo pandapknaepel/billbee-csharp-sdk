@@ -2,6 +2,6 @@
 {
     public class CustomerForCreation : Customer
     {
-        public CustomerAddress Address { get; set; }
+        public CustomerAddress? Address { get; set; }
     }
 }

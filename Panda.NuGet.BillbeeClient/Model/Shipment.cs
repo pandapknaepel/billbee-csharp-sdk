@@ -13,10 +13,10 @@ namespace Panda.NuGet.BillbeeClient.Model
         public long BillbeeId { get; set; }
 
         /// <summary>The id of this shipment</summary>
-        public string ShippingId { get; set; }
+        public string? ShippingId { get; set; }
 
         /// <summary>The name of the shipping provider</summary>
-        public string Shipper { get; set; }
+        public string? Shipper { get; set; }
 
         /// <summary>The creation date</summary>
         public DateTime? Created { get; set; }
@@ -24,7 +24,7 @@ namespace Panda.NuGet.BillbeeClient.Model
         /// <summary>
         /// The url to track this shipment
         /// </summary>
-        public string TrackingUrl { get; set; }
+        public string? TrackingUrl { get; set; }
 
         /// <summary>
         /// The id of the used shipping provider

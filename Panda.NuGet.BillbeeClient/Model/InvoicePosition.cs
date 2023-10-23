@@ -48,12 +48,12 @@
         /// <summary>
         /// The sku of the article of this position
         /// </summary>
-        public string Sku { get; set; }
+        public string? Sku { get; set; }
 
         /// <summary>
         /// The title to be shown in the invoice of this position
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The unique internal id of this position

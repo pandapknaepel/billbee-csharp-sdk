@@ -13,12 +13,12 @@
         /// <summary>
         /// The comment itself
         /// </summary>
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The name of the sender
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The date, when this commment was published
