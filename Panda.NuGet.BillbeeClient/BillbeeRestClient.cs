@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http.Json;
 using Panda.NuGet.BillbeeClient.Configs;
 using Panda.NuGet.BillbeeClient.Exceptions;
+using Panda.NuGet.BillbeeClient.Extensions;
 using Panda.NuGet.BillbeeClient.Utilities;
 
 namespace Panda.NuGet.BillbeeClient;
@@ -26,6 +27,8 @@ internal class BillbeeRestClient : IBillbeeRestClient
     private readonly HttpClient _httpClient;
     private readonly IRateLimiter _rateLimiter;
     
+    private const int MaxRetries = 3;
+    private const int DelaySeconds = 10;
     private const string GlobalRateLimitKey = "GlobalRateLimitKey";
 
     public BillbeeRestClient(BillbeeApiConfig billbeeApiConfig, HttpClient httpClient, IRateLimiter rateLimiter)
@@ -138,26 +141,26 @@ internal class BillbeeRestClient : IBillbeeRestClient
             .Select(key => $"{Uri.EscapeDataString(key!)}={Uri.EscapeDataString(nameValueCollection[key]!)}"));
     }
     
-    private async Task<HttpResponseMessage> SendRequestWithRetryAsync(HttpRequestMessage requestMessage)
+    private async Task<HttpResponseMessage> SendRequestWithRetryAsync(HttpRequestMessage initialRequestMessage)
     {
-        for (var retry = 0; retry <= 3; retry++)
+        for (var retry = 0; retry <= MaxRetries; retry++)
         {
             await _rateLimiter.ThrottleAsync(GlobalRateLimitKey, 50, 1);
-            
+
+            var requestMessage = initialRequestMessage.Clone();
             var response = await _httpClient.SendAsync(requestMessage);
 
-            if (response.StatusCode != HttpStatusCode.TooManyRequests || retry == 3)
+            if (response.StatusCode != HttpStatusCode.TooManyRequests || retry == MaxRetries)
             {
                 await HandleResponseAsync($"{requestMessage.Method} {requestMessage.RequestUri}", response);
                 return response;
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(10));
+            await Task.Delay(TimeSpan.FromSeconds(DelaySeconds * retry + 1));
         }
 
         throw new InvalidOperationException("Max retries reached.");
     }
-
 
     private static async Task HandleResponseAsync(string caller, HttpResponseMessage response)
     {
