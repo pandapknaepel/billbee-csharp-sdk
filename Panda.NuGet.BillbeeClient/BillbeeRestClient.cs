@@ -1,6 +1,8 @@
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using Panda.NuGet.BillbeeClient.Configs;
 using Panda.NuGet.BillbeeClient.Exceptions;
 using Panda.NuGet.BillbeeClient.Extensions;
@@ -62,7 +64,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
         var path = GetBasePath(resource);
         var requestMessage = new HttpRequestMessage(HttpMethod.Put, path)
         {
-            Content = JsonContent.Create(request)
+            Content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json")
         };
         var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
@@ -73,7 +75,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
         var path = GetBasePath(resource);
         var requestMessage = new HttpRequestMessage(HttpMethod.Put, path)
         {
-            Content = JsonContent.Create(request)
+            Content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json")
         };
         _ = await SendRequestWithRetryAsync(requestMessage);
     }
@@ -83,7 +85,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
         var path = GetBasePath(resource);
         var requestMessage = new HttpRequestMessage(new HttpMethod("PATCH"), path)
         {
-            Content = JsonContent.Create(request)
+            Content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json")
         };
         var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
@@ -94,7 +96,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
         var path = GetBasePath(resource);
         var requestMessage = new HttpRequestMessage(HttpMethod.Post, path)
         {
-            Content = JsonContent.Create(request)
+            Content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json")
         };
         var response = await SendRequestWithRetryAsync(requestMessage);
         return (await response.Content.ReadFromJsonAsync<TResponse>())!;
@@ -105,7 +107,7 @@ internal class BillbeeRestClient : IBillbeeRestClient
         var path = GetBasePath(resource);
         var requestMessage = new HttpRequestMessage(HttpMethod.Post, path)
         {
-            Content = JsonContent.Create(request)
+            Content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json")
         };
         _ = await SendRequestWithRetryAsync(requestMessage);
     }
